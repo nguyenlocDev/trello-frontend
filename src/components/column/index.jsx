@@ -3,7 +3,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { Box, Button, Paper, Typography, IconButton } from "@mui/material";
 import MenuEditColunm from "./menu";
 
-function Column({ children }) {
+function Column({ children, columns }) {
   return (
     <Box
       sx={{
@@ -40,7 +40,7 @@ function Column({ children }) {
             fontSize={16}
             fontWeight={500}
           >
-            Colunm name
+            {columns?.title}
           </Typography>
           <Box>
             <MenuEditColunm></MenuEditColunm>

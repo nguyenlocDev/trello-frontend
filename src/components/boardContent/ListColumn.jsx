@@ -2,8 +2,10 @@ import Column from "../column";
 import { Box, Button } from "@mui/material";
 import ListCard from "./ListCard";
 import AddCardIcon from "@mui/icons-material/AddCard";
+import { mapOrder } from "~/utils/sort";
 
-function ListColumn() {
+function ListColumn({ board }) {
+  const oderedColumn = mapOrder(board?.columns, board?.columnOrderIds, "_id");
   return (
     <Box
       sx={{
@@ -14,18 +16,18 @@ function ListColumn() {
         width: "100%",
       }}
     >
-      <Column>
-        <ListCard />
-      </Column>
-      <Column />
-      <Column />
-      <Column />
-      <Column />
-      <Column />
+      {oderedColumn.map((items) => (
+        <Column key={items._id} columns={items}>
+          <ListCard cards={items?.cards} columns={items} />
+        </Column>
+      ))}
+
       <CreateNewColumn></CreateNewColumn>
     </Box>
   );
 }
+
+//birthday it's lonly
 
 export default ListColumn;
 

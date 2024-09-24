@@ -1,6 +1,6 @@
 import { Paper, Typography } from "@mui/material";
 
-function Card() {
+function Card({ cards }) {
   return (
     <Paper
       elevation={3}
@@ -12,7 +12,7 @@ function Card() {
       }}
     >
       <Typography variant="span" color="primaty.light">
-        succes
+        {cards?.title}
       </Typography>
     </Paper>
   );

@@ -1,7 +1,7 @@
 import { Box } from "@mui/material";
 import ListColumn from "./ListColumn";
 
-export default function BoardContent() {
+export default function BoardContent({ board }) {
   return (
     <Box
       sx={{
@@ -15,7 +15,7 @@ export default function BoardContent() {
         overflowY: "hidden",
       }}
     >
-      <ListColumn />
+      <ListColumn board={board} />
     </Box>
   );
 }
