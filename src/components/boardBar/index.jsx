@@ -6,8 +6,9 @@ import AddToDriveIcon from "@mui/icons-material/AddToDrive";
 import PublicIcon from "@mui/icons-material/Public";
 import DashboardIcon from "@mui/icons-material/Dashboard";
 import avatar from "~/assets/avatar.jpg";
+import { capitalizeFirstLetter } from "~/utils/capitalize";
 
-export default function BoardBar() {
+export default function BoardBar({ board }) {
   return (
     <Box
       sx={{
@@ -39,7 +40,7 @@ export default function BoardBar() {
           sx={{ cursor: "pointer" }}
         >
           <DashboardIcon></DashboardIcon>
-          <Typography variant="span">Name Board</Typography>
+          <Typography variant="span">{board?.title}</Typography>
         </Box>
         <Box
           display={"flex"}
@@ -48,7 +49,9 @@ export default function BoardBar() {
           sx={{ cursor: "pointer" }}
         >
           <PublicIcon></PublicIcon>
-          <Typography variant="span">Public and private board</Typography>
+          <Typography variant="span">
+            {capitalizeFirstLetter(board?.type)}
+          </Typography>
         </Box>
         <Box
           display={"flex"}
