@@ -2,10 +2,31 @@ import FeedIcon from "@mui/icons-material/Feed";
 import AddIcon from "@mui/icons-material/Add";
 import { Box, Button, Paper, Typography, IconButton } from "@mui/material";
 import MenuEditColunm from "./menu";
+import { useSortable } from "@dnd-kit/sortable";
+import { CSS } from "@dnd-kit/utilities";
 
 function Column({ children, columns }) {
+  const {
+    attributes,
+    listeners,
+    setNodeRef,
+    transform,
+    transition,
+    isDragging,
+  } = useSortable({ id: columns._id, data: { ...columns } });
+
+  const dndKitColumns = {
+    // touchAction: "none", co the fix but hen xui
+    transform: CSS.Translate.toString(transform),
+    transition,
+    opacity: isDragging ? "0.5" : "1",
+  };
+
   return (
     <Box
+      ref={setNodeRef}
+      style={dndKitColumns}
+      {...attributes}
       sx={{
         display: " flex",
         height: "100%",
@@ -14,6 +35,7 @@ function Column({ children, columns }) {
       }}
     >
       <Paper
+        {...listeners}
         sx={{
           padding: 1,
           minWidth: "272px",
@@ -22,7 +44,6 @@ function Column({ children, columns }) {
           display: "flex",
           flexDirection: "column",
           gap: 0.5,
-
           overflow: "hidden",
         }}
         elevation={12}

@@ -2,28 +2,35 @@ import Column from "../column";
 import { Box, Button } from "@mui/material";
 import ListCard from "./ListCard";
 import AddCardIcon from "@mui/icons-material/AddCard";
-import { mapOrder } from "~/utils/sort";
+import {
+  SortableContext,
+  horizontalListSortingStrategy,
+} from "@dnd-kit/sortable";
 
-function ListColumn({ board }) {
-  const oderedColumn = mapOrder(board?.columns, board?.columnOrderIds, "_id");
+function ListColumn({ columns }) {
   return (
-    <Box
-      sx={{
-        display: "flex",
-        gap: 2,
-        alignItems: "inherit",
-        overflowY: "hidden",
-        width: "100%",
-      }}
+    <SortableContext
+      items={columns?.map((i) => i._id)}
+      strategy={horizontalListSortingStrategy}
     >
-      {oderedColumn.map((items) => (
-        <Column key={items._id} columns={items}>
-          <ListCard cards={items?.cards} columns={items} />
-        </Column>
-      ))}
+      <Box
+        sx={{
+          display: "flex",
+          gap: 2,
+          alignItems: "inherit",
+          overflowY: "hidden",
+          width: "100%",
+        }}
+      >
+        {columns?.map((items) => (
+          <Column key={items._id} columns={items}>
+            <ListCard cards={items?.cards} columns={items} />
+          </Column>
+        ))}
 
-      <CreateNewColumn></CreateNewColumn>
-    </Box>
+        <CreateNewColumn></CreateNewColumn>
+      </Box>
+    </SortableContext>
   );
 }
 
